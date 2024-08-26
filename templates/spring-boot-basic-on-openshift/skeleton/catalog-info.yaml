@@ -4,8 +4,6 @@ metadata:
   name: ${{ values.appName }}
   title: ${{ values.appName }}
   annotations:
-    janus-idp.io/tekton: ${{ values.appName }}
-    tektonci/build-namespace: ${{ values.namespace }}
     github.com/project-slug: ${{ values.orgName }}/${{ values.appName }}
     sonarqube.org/project-key: ${{ values.orgName }}_${{ values.appName }}
     backstage.io/kubernetes-id: ${{ values.appName }}
@@ -15,11 +13,10 @@ metadata:
     - spring-boot
     - java
     - maven
-    - tekton
     - argocd
-    - renovate
     - sonarqube
+    - github-actions
 spec:
   type: service
-  owner: piomin
+  owner: sinqia
   lifecycle: experimental

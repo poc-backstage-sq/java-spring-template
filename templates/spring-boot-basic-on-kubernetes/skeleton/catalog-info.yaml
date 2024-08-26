@@ -14,10 +14,10 @@ metadata:
     - spring-boot
     - java
     - maven
-    - circleci
+    - github-actions
     - renovate
     - sonarqube
 spec:
   type: service
-  owner: piotr.minkowski@gmail.com
+  owner: sinqia
   lifecycle: experimental
