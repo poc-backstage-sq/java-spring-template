@@ -50,11 +50,11 @@ spec:
         groupId:
           title: Maven Group ID
           type: string
-          default: pl.sinqia.services
+          default: sq.sinqia.services
         javaPackage:
           title: Java package directory
           type: string
-          default: pl/sinqia/services
+          default: sq/sinqia/services
         apiPath:
           title: REST API path
           type: string
