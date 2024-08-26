@@ -8,11 +8,8 @@ metadata:
     - spring-boot
     - java
     - maven
-    - circleci
+    - github-actions
     - renovate
-    - sonarqube
-    - kubernetes
-    - argocd
 spec:
   owner: sinqia
   system: microservices
@@ -98,15 +95,15 @@ spec:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: /catalog-info.yaml
 
-    - id: configCodeTemplate
-      name: Generating the Config Code Component
-      action: fetch:template
-      input:
-        url: ../../skeletons/argocd
-        values:
-          orgName: ${{ parameters.orgName }}
-          appName: ${{ parameters.appName }}
-        targetPath: ./gitops
+    # - id: configCodeTemplate
+    #   name: Generating the Config Code Component
+    #   action: fetch:template
+    #   input:
+    #     url: ../../skeletons/argocd
+    #     values:
+    #       orgName: ${{ parameters.orgName }}
+    #       appName: ${{ parameters.appName }}
+    #     targetPath: ./gitops
 
     - id: publish
       name: Publishing to the Config Code Repository
@@ -119,51 +116,51 @@ spec:
         sourcePath: ./gitops
         repoVisibility: public
 
-    - id: sonarqube
-      name: Follow new project on Sonarcloud
-      action: http:backstage:request
-      input:
-        method: 'POST'
-        path: '/proxy/sonarqube/projects/create?name=${{ parameters.appName }}&organization=${{ parameters.orgName }}&project=${{ parameters.orgName }}_${{ parameters.appName }}'
-        headers:
-          content-type: 'application/json'
+    # - id: sonarqube
+    #   name: Follow new project on Sonarcloud
+    #   action: http:backstage:request
+    #   input:
+    #     method: 'POST'
+    #     path: '/proxy/sonarqube/projects/create?name=${{ parameters.appName }}&organization=${{ parameters.orgName }}&project=${{ parameters.orgName }}_${{ parameters.appName }}'
+    #     headers:
+    #       content-type: 'application/json'
 
-    - id: circleci
-      name: Follow new project on CircleCI
-      action: http:backstage:request
-      input:
-        method: 'POST'
-        path: '/proxy/circleci/api/project/gh/${{ parameters.orgName }}/${{ parameters.appName }}/follow'
-        headers:
-          content-type: 'application/json'
+    # - id: circleci
+    #   name: Follow new project on CircleCI
+    #   action: http:backstage:request
+    #   input:
+    #     method: 'POST'
+    #     path: '/proxy/circleci/api/project/gh/${{ parameters.orgName }}/${{ parameters.appName }}/follow'
+    #     headers:
+    #       content-type: 'application/json'
 
-    - id: argocd
-      name: Create New Application in Argo CD
-      action: http:backstage:request
-      input:
-        method: 'POST'
-        path: '/proxy/argocd/api/applications'
-        headers:
-          content-type: 'application/json'
-        body:
-          metadata:
-            name: ${{ parameters.appName }}
-            namespace: argocd
-          spec:
-            project: default
-            source:
-              repoURL: https://github.com/${{ parameters.orgName }}/${{ parameters.appName }}-config.git
-              targetRevision: main
-              path: manifests
-            destination:
-              server: https://kubernetes.default.svc
-              namespace: ${{ parameters.namespace }}
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions:
-                - CreateNamespace=true
+    # - id: argocd
+    #   name: Create New Application in Argo CD
+    #   action: http:backstage:request
+    #   input:
+    #     method: 'POST'
+    #     path: '/proxy/argocd/api/applications'
+    #     headers:
+    #       content-type: 'application/json'
+    #     body:
+    #       metadata:
+    #         name: ${{ parameters.appName }}
+    #         namespace: argocd
+    #       spec:
+    #         project: default
+    #         source:
+    #           repoURL: https://github.com/${{ parameters.orgName }}/${{ parameters.appName }}-config.git
+    #           targetRevision: main
+    #           path: manifests
+    #         destination:
+    #           server: https://kubernetes.default.svc
+    #           namespace: ${{ parameters.namespace }}
+    #         syncPolicy:
+    #           automated:
+    #             prune: true
+    #             selfHeal: true
+    #           syncOptions:
+    #             - CreateNamespace=true
 
   output:
     links:
