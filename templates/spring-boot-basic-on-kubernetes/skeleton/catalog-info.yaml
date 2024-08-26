@@ -7,12 +7,12 @@ metadata:
     github.com/project-slug: ${{ values.orgName }}/${{ values.appName }}
     backstage.io/kubernetes-id: ${{ values.appName }}
   tags:
-    # - spring-boot
-    # - java
-    # - maven
-    # - github-actions
-    # - renovate
-    # #- sonarqube
+    - spring-boot
+    - java
+    - maven
+    - github-actions
+    - renovate
+    #- sonarqube
 spec:
   type: service
   owner: sq
