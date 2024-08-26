@@ -12,7 +12,6 @@ metadata:
     - maven
     - github-actions
     - renovate
-    - sonarqube
 spec:
   type: service
   owner: sq
