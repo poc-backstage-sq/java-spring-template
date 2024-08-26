@@ -46,7 +46,7 @@ spec:
         repoBranchName:
           title: Name of the branch in the Git repository
           type: string
-          default: master
+          default: main
         groupId:
           title: Maven Group ID
           type: string
@@ -153,7 +153,7 @@ spec:
             project: default
             source:
               repoURL: https://github.com/${{ parameters.orgName }}/${{ parameters.appName }}-config.git
-              targetRevision: master
+              targetRevision: main
               path: manifests
             destination:
               server: https://kubernetes.default.svc

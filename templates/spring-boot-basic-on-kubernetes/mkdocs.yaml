@@ -1,0 +1,8 @@
+site_name: ${{ values.appName }} Docs 
+
+nav:
+  - Home: index.md
+#  - Sobre: developing-a-plugin.md
+
+plugins:
+  - techdocs-core
