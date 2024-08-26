@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: spring-boot-basic-on-kubernetes-template
-  title: Create a Spring Boot app for Kubernetes
+  title: Create a Spring Boot app for Kubernetes FULL
   description: Create a Spring Boot app for Kubernetes
   tags:
     - spring-boot
