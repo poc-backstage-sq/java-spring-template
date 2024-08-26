@@ -10,7 +10,6 @@ metadata:
     - maven
     - circleci
     - renovate
-    - sonarqube
 spec:
   owner: sinqia
   system: microservices
