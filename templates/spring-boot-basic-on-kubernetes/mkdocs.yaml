@@ -3,6 +3,6 @@ site_name: ${{ values.appName }} Docs
 nav:
   - Home: index.md
 #  - Sobre: developing-a-plugin.md
-
 plugins:
-  - techdocs-core
+  - techdocs-core:
+      use_material_search: true
